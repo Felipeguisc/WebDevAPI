@@ -13,13 +13,13 @@ public class FuncionarioController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetFuncionario")]
+    [HttpGet(Name = "GetFuncionarios")]
     public IActionResult Get()
     {
         return Ok("get TODOS executado");
     }
 
-    [HttpGet("{id:int}", Name = "GetWeather")]
+    [HttpGet("{id:int}", Name = "GetFuncionario")]
     public IActionResult Get(int id)
     {
         return Ok("get UM executado");

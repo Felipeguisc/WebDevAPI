@@ -10,4 +10,3 @@ public class Staff
 
     public string? Summary { get; set; }
 }
-

@@ -1,6 +1,24 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+var dbContextOptions = new DbContextOptionsBuilder<MyDbContext>()
+    .UseSqlite(configuration.GetConnectionString("MyDbConnection"))
+    .Options;
 
 // Add services to the container.
+var dbContext = new MyDbContext(dbContextOptions);
+
+builder.Services.AddDbContext<MyDbContext>(options =>
+{
+    options.UseSqlite("Data Source=/Users/felipegui/Documents/Development/WebDevDB.sqlite3");
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
