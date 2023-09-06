@@ -19,7 +19,7 @@ public class ClienteController : ControllerBase
     [HttpGet(Name = "GetCliente")]
     public IActionResult Get()
     {
-        var clients = _dbContext.Clientes.ToList(); // Assuming "Clientes" is your entity DbSet.
+        var clients = _dbContext.Clientes.ToList();
 
         return Ok(clients);
     }
