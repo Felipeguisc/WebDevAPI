@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Aula_API.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ var dbContext = new MyDbContext(dbContextOptions);
 
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
-    options.UseSqlite("Data Source=/Users/felipegui/Documents/Development/WebDevDB.sqlite3");
+    options.UseSqlite(configuration.GetConnectionString("MyDbConnection"));
 });
 
 builder.Services.AddControllers();

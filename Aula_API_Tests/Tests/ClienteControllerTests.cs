@@ -1,23 +1,18 @@
-﻿using System;
-using Aula_API;
-using Aula_API.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Xunit;
-using Moq;
-using Aula_API_Tests.Tests;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Aula_API.Controllers;
 using Aula_API.DataAccess;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace Aula_API_Tests;
 
-public class ProdutoControllerTests
+public class ClienteControllerTests
 {
     private readonly MyDbContext _dbContext;
-    private readonly ProdutoController _controller;
+    private readonly ClienteController _controller;
 
-    public ProdutoControllerTests()
+    public ClienteControllerTests()
     {
         // Configure DbContextOptions for in-memory database
         var options = new DbContextOptionsBuilder<MyDbContext>()
@@ -27,35 +22,38 @@ public class ProdutoControllerTests
         // Create an instance of the testing DbContext
         _dbContext = new MyDbContext(options);
 
-        var loggerMock = new Mock<ILogger<ProdutoController>>();
-        _controller = new ProdutoController(_dbContext, loggerMock.Object);
+        var loggerMock = new Mock<ILogger<ClienteController>>();
+        _controller = new ClienteController(_dbContext, loggerMock.Object);
     }
 
     [Fact]
-    public void Get_ReturnsOkResultForGetAll()
+    public void Get_ReturnsOkResultForGetAll_01()
     {
-        Produto produto = new Produto
+        // Adding entities
+        Cliente cliente = new Cliente
         {
             Nome = "Example Entity",
-            Descricao = "Teste Descricao",
-            Foto = new byte[1],
-            ValorUnitario = 1.22m,
+            Cpf = "Teste Descricao",
+            Telefone = "Teste Descricao",
+            CompraFiado = 1,
+            Senha = "Example Password",
         };
 
-        Produto produto2 = new Produto
+        Cliente cliente2 = new Cliente
         {
             Nome = "Example Entity",
-            Descricao = "Teste Descricao",
-            Foto = new byte[1],
-            ValorUnitario = 1.22m,
+            Cpf = "Teste Descricao",
+            Telefone = "Teste Descricao",
+            CompraFiado = 1,
+            Senha = "Example Password",
         };
 
-        // Act
-        var resultPost = _controller.Post(produto) as OkObjectResult;
-        var resultPost2 = _controller.Post(produto2) as OkObjectResult;
+        var resultPost = _controller.Post(cliente) as OkObjectResult;
+        var resultPost2 = _controller.Post(cliente2) as OkObjectResult;
 
         _dbContext.SaveChanges();
 
+        // Act
         var result = _controller.Get() as OkObjectResult;
 
         // Assert
@@ -66,21 +64,21 @@ public class ProdutoControllerTests
     [Fact]
     public void Get_ReturnsOkResultForGetById()
     {
-        Produto produto = new Produto
+        Cliente cliente = new Cliente
         {
-            Id = 1,
             Nome = "Example Entity",
-            Descricao = "Teste Descricao",
-            Foto = new byte[1],
-            ValorUnitario = 1.22m,
+            Cpf = "Teste Descricao",
+            Telefone = "Teste Descricao",
+            CompraFiado = 1,
+            Senha = "Example Password",
         };
 
         // Act
-        var resultPost = _controller.Post(produto) as OkObjectResult;
+        var resultPost = _controller.Post(cliente) as OkObjectResult;
 
         _dbContext.SaveChanges();
 
-        var result = _controller.Get(produto.Id) as OkObjectResult;
+        var result = _controller.Get(cliente.Id) as OkObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -90,16 +88,17 @@ public class ProdutoControllerTests
     [Fact]
     public void Post_ReturnsOkResult()
     {
-        Produto produto = new Produto
+        Cliente cliente = new Cliente
         {
             Nome = "Example Entity",
-            Descricao = "Teste Descricao",
-            Foto = new byte[1],
-            ValorUnitario = 1.22m,
+            Cpf = "Teste Descricao",
+            Telefone = "Teste Descricao",
+            CompraFiado = 1,
+            Senha = "Example Password",
         };
 
         // Act
-        var result = _controller.Post(produto) as OkObjectResult;
+        var result = _controller.Post(cliente) as OkObjectResult;
 
         _dbContext.SaveChanges();
 
@@ -111,31 +110,30 @@ public class ProdutoControllerTests
     [Fact]
     public void Put_ReturnsCreatedResult()
     {
-        Produto produto = new Produto
+        Cliente cliente = new Cliente
         {
             Nome = "Example Entity",
-            Descricao = "Teste Descricao",
-            Foto = new byte[1],
-            ValorUnitario = 1.22m,
+            Cpf = "Teste Descricao",
+            Telefone = "Teste Descricao",
+            CompraFiado = 1,
+            Senha = "Example Password",
         };
 
-        var resultPost = _controller.Post(produto) as OkObjectResult;
+        var resultPost = _controller.Post(cliente) as OkObjectResult;
 
-        _dbContext.SaveChanges();
-
-        Produto produtoUpdate = new Produto
+        Cliente clienteUpdate = new Cliente
         {
-            Id = 1,
             Nome = "Example Entity",
-            Descricao = "Teste Descricao Update",
-            Foto = new byte[1],
-            ValorUnitario = 1.22m,
+            Cpf = "Teste Descricao",
+            Telefone = "Teste Descricao",
+            CompraFiado = 1,
+            Senha = "Example Password",
         };
 
         var resultGet = _controller.Get() as OkObjectResult;
 
         // Act
-        var result = _controller.Put(produtoUpdate) as ObjectResult;
+        var result = _controller.Put(clienteUpdate) as ObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -143,23 +141,23 @@ public class ProdutoControllerTests
     }
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(10)]
+    [InlineData(5)]
     public void Delete_ReturnsCreatedResult(int id)
     {
-        Produto produto = new Produto
+        Cliente cliente = new Cliente
         {
             Id = id,
             Nome = "Example Entity",
-            Descricao = "Teste Descricao",
-            Foto = new byte[1],
-            ValorUnitario = 1.22m,
+            Cpf = "Teste Descricao",
+            Telefone = "Teste Descricao",
+            CompraFiado = 1,
+            Senha = "Example Password",
         };
 
         // Act
-        var resultPost = _controller.Post(produto) as OkObjectResult;
+        var resultPost = _controller.Post(cliente) as OkObjectResult;
 
-        var result = _controller.Delete(produto.Id) as ObjectResult;
+        var result = _controller.Delete(cliente.Id) as ObjectResult;
 
         // Assert
         Assert.NotNull(result);

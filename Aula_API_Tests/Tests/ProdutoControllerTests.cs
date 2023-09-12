@@ -1,23 +1,18 @@
-﻿using System;
-using Aula_API;
-using Aula_API.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Xunit;
-using Moq;
-using Aula_API_Tests.Tests;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Aula_API.Controllers;
 using Aula_API.DataAccess;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace Aula_API_Tests;
 
-public class FuncionarioControllerTests
+public class ProdutoControllerTests
 {
     private readonly MyDbContext _dbContext;
-    private readonly FuncionarioController _controller;
+    private readonly ProdutoController _controller;
 
-    public FuncionarioControllerTests()
+    public ProdutoControllerTests()
     {
         // Configure DbContextOptions for in-memory database
         var options = new DbContextOptionsBuilder<MyDbContext>()
@@ -27,38 +22,32 @@ public class FuncionarioControllerTests
         // Create an instance of the testing DbContext
         _dbContext = new MyDbContext(options);
 
-        var loggerMock = new Mock<ILogger<FuncionarioController>>();
-        _controller = new FuncionarioController(_dbContext, loggerMock.Object);
+        var loggerMock = new Mock<ILogger<ProdutoController>>();
+        _controller = new ProdutoController(_dbContext, loggerMock.Object);
     }
 
     [Fact]
     public void Get_ReturnsOkResultForGetAll()
     {
-        Funcionario funcionario = new Funcionario
+        Produto produto = new Produto
         {
-            Id = 1,
             Nome = "Example Entity",
-            Matricula = "123334",
-            Cpf = "000000000000",
-            Telefone = "1231231233",
-            Grupo = 1,
-            Senha = "123123",
+            Descricao = "Teste Descricao",
+            Foto = new byte[1],
+            ValorUnitario = 1.22m,
         };
 
-        Funcionario funcionario2 = new Funcionario
+        Produto produto2 = new Produto
         {
-            Id = 2,
-            Nome = "Example 2",
-            Matricula = "123334",
-            Cpf = "000000000000",
-            Telefone = "1231231233",
-            Grupo = 1,
-            Senha = "123123",
+            Nome = "Example Entity",
+            Descricao = "Teste Descricao",
+            Foto = new byte[1],
+            ValorUnitario = 1.22m,
         };
 
         // Act
-        var resultPost = _controller.Post(funcionario) as OkObjectResult;
-        var resultPost2 = _controller.Post(funcionario2) as OkObjectResult;
+        var resultPost = _controller.Post(produto) as OkObjectResult;
+        var resultPost2 = _controller.Post(produto2) as OkObjectResult;
 
         _dbContext.SaveChanges();
 
@@ -72,22 +61,20 @@ public class FuncionarioControllerTests
     [Fact]
     public void Get_ReturnsOkResultForGetById()
     {
-        Funcionario funcionario = new Funcionario
+        Produto produto = new Produto
         {
             Nome = "Example Entity",
-            Matricula = "123334",
-            Cpf = "000000000000",
-            Telefone = "1231231233",
-            Grupo = 1,
-            Senha = "123123",
+            Descricao = "Teste Descricao",
+            Foto = new byte[1],
+            ValorUnitario = 1.22m,
         };
 
         // Act
-        var resultPost = _controller.Post(funcionario) as OkObjectResult;
+        var resultPost = _controller.Post(produto) as OkObjectResult;
 
         _dbContext.SaveChanges();
 
-        var result = _controller.Get(funcionario.Id) as OkObjectResult;
+        var result = _controller.Get(produto.Id) as OkObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -97,40 +84,51 @@ public class FuncionarioControllerTests
     [Fact]
     public void Post_ReturnsOkResult()
     {
-        Funcionario funcionario = new Funcionario
+        Produto produto = new Produto
         {
             Nome = "Example Entity",
-            Matricula = "123334",
-            Cpf = "000000000000",
-            Telefone = "1231231233",
-            Grupo = 1,
-            Senha = "123123",
+            Descricao = "Teste Descricao",
+            Foto = new byte[1],
+            ValorUnitario = 1.22m,
         };
 
         // Act
-        var result = _controller.Post(funcionario) as OkObjectResult;
+        var result = _controller.Post(produto) as OkObjectResult;
+
+        _dbContext.SaveChanges();
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal("post executado", result.Value);
+        Assert.Equal(200, result.StatusCode);
     }
 
     [Fact]
     public void Put_ReturnsCreatedResult()
     {
-        Funcionario funcionario = new Funcionario
+        Produto produto = new Produto
         {
-            Id = 1,
             Nome = "Example Entity",
-            Matricula = "123334",
-            Cpf = "000000000000",
-            Telefone = "1231231233",
-            Grupo = 1,
-            Senha = "123123",
+            Descricao = "Teste Descricao",
+            Foto = new byte[1],
+            ValorUnitario = 1.22m,
         };
 
+        var resultPost = _controller.Post(produto) as OkObjectResult;
+
+        _dbContext.SaveChanges();
+
+        Produto produtoUpdate = new Produto
+        {
+            Nome = "Example Entity",
+            Descricao = "Teste Descricao Update",
+            Foto = new byte[1],
+            ValorUnitario = 1.22m,
+        };
+
+        var resultGet = _controller.Get() as OkObjectResult;
+
         // Act
-        var result = _controller.Put(funcionario) as ObjectResult;
+        var result = _controller.Put(produtoUpdate) as ObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -142,23 +140,19 @@ public class FuncionarioControllerTests
     [InlineData(10)]
     public void Delete_ReturnsCreatedResult(int id)
     {
-        Funcionario funcionario = new Funcionario
+        Produto produto = new Produto
         {
             Id = id,
             Nome = "Example Entity",
-            Matricula = "123334",
-            Cpf = "000000000000",
-            Telefone = "1231231233",
-            Grupo = 1,
-            Senha = "123123",
+            Descricao = "Teste Descricao",
+            Foto = new byte[1],
+            ValorUnitario = 1.22m,
         };
 
         // Act
-        var resultPost = _controller.Post(funcionario) as OkObjectResult;
+        var resultPost = _controller.Post(produto) as OkObjectResult;
 
-        _dbContext.SaveChanges();
-
-        var result = _controller.Delete(funcionario.Id) as ObjectResult;
+        var result = _controller.Delete(produto.Id) as ObjectResult;
 
         // Assert
         Assert.NotNull(result);

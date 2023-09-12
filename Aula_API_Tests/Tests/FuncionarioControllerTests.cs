@@ -1,14 +1,9 @@
-﻿using System;
-using Aula_API;
-using Aula_API.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Xunit;
-using Moq;
-using Aula_API_Tests.Tests;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Aula_API.Controllers;
 using Aula_API.DataAccess;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace Aula_API_Tests;
 

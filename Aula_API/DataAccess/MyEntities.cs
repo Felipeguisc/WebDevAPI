@@ -1,13 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("MyEntities")]
-public class MyEntity
-{
-    [Key]
-    public int Id { get; set; }
-    public string Name { get; set; }
-}
+namespace Aula_API.DataAccess;
 
 [Table("Funcionario")]
 public class Funcionario
@@ -32,7 +26,7 @@ public class Cliente
     public string Telefone { get; set; }
     public int CompraFiado { get; set; }
     public byte DiaFiado { get; set; }
-    public string senha { get; set; }
+    public string Senha { get; set; }
 }
 
 [Table("Produto")]

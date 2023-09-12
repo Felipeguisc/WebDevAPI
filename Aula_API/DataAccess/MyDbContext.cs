@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+namespace Aula_API.DataAccess;
+
 public class MyDbContext : DbContext
 {
     public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
     {
     }
-
-    public DbSet<MyEntity> MyEntities { get; set; }
 
     public DbSet<Funcionario> Funcionarios { get; set; }
     public DbSet<Cliente> Clientes { get; set; }
@@ -16,20 +16,6 @@ public class MyDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure the entity name (table name)
-        modelBuilder.Entity<MyEntity>()
-            .ToTable("MyEntities");
-
-        // Configure the primary key
-        modelBuilder.Entity<MyEntity>()
-            .HasKey(e => e.Id);
-
-        // Configure properties
-        modelBuilder.Entity<MyEntity>()
-            .Property(e => e.Name)
-            .HasMaxLength(255) // Set a maximum length for the Name property
-            .IsRequired(); // Make the Name property required (not null)
-
         // Configure Funcionario table
         modelBuilder.Entity<Funcionario>()
             .ToTable("Funcionario"); // Set the table name

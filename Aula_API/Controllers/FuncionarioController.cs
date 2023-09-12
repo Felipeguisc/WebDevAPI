@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Aula_API.DataAccess;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Aula_API.Controllers;
 
