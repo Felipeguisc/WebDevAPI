@@ -1,4 +1,5 @@
-﻿using Aula_API.DataAccess;
+﻿using Aula_API.Authentication;
+using Aula_API.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpGet(Name = "GetClientes")]
+    [ApiKey]
     public IActionResult Get()
     {
         try
