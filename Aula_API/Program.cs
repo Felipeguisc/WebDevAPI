@@ -12,6 +12,12 @@ builder.Host.ConfigureServices((hostContext, services) =>
 
     // Register your services and dependencies here
     services.AddScoped<IApiKeyValidation, ApiKeyValidation>();
+
+    services.AddSwaggerGen(c =>
+    {
+        c.OperationFilter<HeaderParameters>();
+    });
+
     // Add other service registrations...
 });
 
