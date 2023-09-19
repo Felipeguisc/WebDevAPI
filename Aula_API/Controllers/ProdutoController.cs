@@ -1,4 +1,5 @@
-﻿using Aula_API.DataAccess;
+﻿using Aula_API.Authentication;
+using Aula_API.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ public class ProdutoController : ControllerBase
     }
 
     [HttpGet(Name = "GetProdutos")]
+    [ApiKey]
     public IActionResult Get()
     {
         try
@@ -33,6 +35,7 @@ public class ProdutoController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetProduto")]
+    [ApiKey]
     public IActionResult Get(int id)
     {
         try
@@ -55,6 +58,7 @@ public class ProdutoController : ControllerBase
     }
 
     [HttpPost(Name = "PostProduto")]
+    [ApiKey]
     public IActionResult Post(Produto produto)
     {
         try
@@ -70,6 +74,7 @@ public class ProdutoController : ControllerBase
     }
 
     [HttpPut(Name = "PutProduto")]
+    [ApiKey]
     public IActionResult Put(Produto produto)
     {
         try
@@ -85,6 +90,7 @@ public class ProdutoController : ControllerBase
     }
 
     [HttpDelete("{id:int}", Name = "DeleteProduto")]
+    [ApiKey]
     public IActionResult Delete(int id)
     {
         try

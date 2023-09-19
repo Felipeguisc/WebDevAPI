@@ -1,4 +1,5 @@
-﻿using Aula_API.DataAccess;
+﻿using Aula_API.Authentication;
+using Aula_API.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpGet(Name = "GetClientes")]
+    [ApiKey]
     public IActionResult Get()
     {
         try
@@ -33,6 +35,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetCliente")]
+    [ApiKey]
     public IActionResult Get(int id)
     {
         try
@@ -55,6 +58,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPost(Name = "PostCliente")]
+    [ApiKey]
     public IActionResult Post(Cliente cliente)
     {
         try
@@ -70,6 +74,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPut(Name = "PutCliente")]
+    [ApiKey]
     public IActionResult Put(Cliente cliente)
     {
         try
@@ -85,6 +90,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpDelete("{id:int}", Name = "DeleteCliente")]
+    [ApiKey]
     public IActionResult Delete(int id)
     {
         try
