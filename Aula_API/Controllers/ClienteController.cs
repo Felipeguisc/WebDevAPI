@@ -35,6 +35,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetCliente")]
+    [ApiKey]
     public IActionResult Get(int id)
     {
         try
@@ -57,6 +58,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPost(Name = "PostCliente")]
+    [ApiKey]
     public IActionResult Post(Cliente cliente)
     {
         try
@@ -72,6 +74,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPut(Name = "PutCliente")]
+    [ApiKey]
     public IActionResult Put(Cliente cliente)
     {
         try
@@ -87,6 +90,7 @@ public class ClienteController : ControllerBase
     }
 
     [HttpDelete("{id:int}", Name = "DeleteCliente")]
+    [ApiKey]
     public IActionResult Delete(int id)
     {
         try

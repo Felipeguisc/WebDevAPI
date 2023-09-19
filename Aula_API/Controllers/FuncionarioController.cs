@@ -1,4 +1,5 @@
-﻿using Aula_API.DataAccess;
+﻿using Aula_API.Authentication;
+using Aula_API.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aula_API.Controllers;
@@ -17,6 +18,7 @@ public class FuncionarioController : ControllerBase
     }
 
     [HttpGet(Name = "GetFuncionarios")]
+    [ApiKey]
     public IActionResult Get()
     {
         try
@@ -32,6 +34,7 @@ public class FuncionarioController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetFuncionario")]
+    [ApiKey]
     public IActionResult Get(int id)
     {
         try
@@ -54,6 +57,7 @@ public class FuncionarioController : ControllerBase
     }
 
     [HttpPost(Name = "PostFuncionario")]
+    [ApiKey]
     public IActionResult Post(Funcionario funcionario)
     {
         try
@@ -69,6 +73,7 @@ public class FuncionarioController : ControllerBase
     }
 
     [HttpPut(Name = "PutFuncionario")]
+    [ApiKey]
     public IActionResult Put(Funcionario funcionario)
     {
         try
@@ -84,6 +89,7 @@ public class FuncionarioController : ControllerBase
     }
 
     [HttpDelete("{id:int}", Name = "DeleteFuncionario")]
+    [ApiKey]
     public IActionResult Delete(int id)
     {
         try

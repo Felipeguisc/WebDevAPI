@@ -21,4 +21,17 @@ public class ApiKeyValidation : IApiKeyValidation
 
         return true;
     }
+
+    public bool IsValidApiToken(string userApiToken)
+    {
+        if (string.IsNullOrWhiteSpace(userApiToken))
+            return false;
+
+        string? apiKey = _configuration.GetValue<string>(Constants.ApiTokenName);
+
+        if (apiKey == null || apiKey != userApiToken)
+            return false;
+
+        return true;
+    }
 }

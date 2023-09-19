@@ -15,15 +15,15 @@ public class ApiKeyAuthFilter : IAuthorizationFilter
     public void OnAuthorization(AuthorizationFilterContext context)
     {
         string userApiKey = context.HttpContext.Request.Headers[Constants.ApiKeyHeaderName].ToString();
-        string apiKey = context.HttpContext.Request.Headers[Constants.ApiKeyName].ToString();
+        string userApiToken = context.HttpContext.Request.Headers[Constants.ApiTokenHeaderName].ToString();
 
-        if (string.IsNullOrWhiteSpace(userApiKey))
+        if (string.IsNullOrWhiteSpace(userApiKey) || string.IsNullOrWhiteSpace(userApiToken))
         {
             context.Result = new BadRequestResult();
             return;
         }
 
-        if (!_apiKeyValidation.IsValidApiKey(userApiKey))
+        if (!_apiKeyValidation.IsValidApiKey(userApiKey) || !_apiKeyValidation.IsValidApiToken(userApiToken))
             context.Result = new UnauthorizedResult();
     }
 }
