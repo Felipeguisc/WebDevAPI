@@ -1,7 +1,7 @@
 ﻿using Aula_API.Authentication;
 using Aula_API.DataAccess;
+using Aula_API.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Aula_API.Controllers;
 
@@ -44,7 +44,7 @@ public class ClienteController : ControllerBase
 
             if (cliente != null)
             {
-                return Ok(cliente);
+                return Ok(new object[] { cliente, 200 });
             }
             else
             {
@@ -65,7 +65,13 @@ public class ClienteController : ControllerBase
         {
             var result = _dbContext.Clientes.Add(cliente);
             _dbContext.SaveChanges();
-            return Ok("post executado");
+
+            var resultado = new ApiResponse
+            {
+                Msg = "Cadastrado com sucesso!"
+            };
+
+            return Ok(new object[] { resultado, 200 });
         }
         catch (Exception ex)
         {
@@ -81,7 +87,12 @@ public class ClienteController : ControllerBase
         {
             var result = _dbContext.Clientes.Update(cliente);
             _dbContext.SaveChanges();
-            return StatusCode(201, "put executado");
+            var resultado = new ApiResponse
+            {
+                Msg = "Atualizado com sucesso!"
+            };
+
+            return Ok(new object[] { resultado, 200 });
         }
         catch (Exception ex)
         {
@@ -102,11 +113,21 @@ public class ClienteController : ControllerBase
                 var result = _dbContext.Clientes.Remove(cliente);
                 _dbContext.SaveChanges();
 
-                return StatusCode(201, $"Entity with ID {cliente.Id} has been deleted.");
+                var resultado = new ApiResponse
+                {
+                    Msg = "Deletado com sucesso!"
+                };
+
+                return Ok(new object[] { resultado, 200 });
             }
             else
             {
-                return StatusCode(404, "Entity not found, so it cannot be deleted.");
+                var resultado = new ApiResponse
+                {
+                    Msg = "Erro ao deletar!"
+                };
+
+                return StatusCode(404, new object[] { resultado, 200 });
             }
         }
         catch (Exception ex)

@@ -1,5 +1,6 @@
 ﻿using Aula_API.Authentication;
 using Aula_API.DataAccess;
+using Aula_API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aula_API.Controllers;
@@ -43,7 +44,7 @@ public class FuncionarioController : ControllerBase
 
             if (funcionario != null)
             {
-                return Ok(funcionario);
+                return Ok(new object[] { funcionario, 200 });
             }
             else
             {
@@ -64,7 +65,13 @@ public class FuncionarioController : ControllerBase
         {
             var result = _dbContext.Funcionarios.Add(funcionario);
             _dbContext.SaveChanges();
-            return Ok("post executado");
+
+            var resultado = new ApiResponse
+            {
+                Msg = "Cadastrado com sucesso!"
+            };
+
+            return Ok(new object[] { resultado, 200 });
         }
         catch (Exception ex)
         {
@@ -80,7 +87,13 @@ public class FuncionarioController : ControllerBase
         {
             var result = _dbContext.Funcionarios.Update(funcionario);
             _dbContext.SaveChanges();
-            return StatusCode(201, "put executado");
+
+            var resultado = new ApiResponse
+            {
+                Msg = "Atualizado com sucesso!"
+            };
+
+            return Ok(new object[] { resultado, 200 });
         }
         catch (Exception ex)
         {
@@ -101,7 +114,12 @@ public class FuncionarioController : ControllerBase
                 var result = _dbContext.Funcionarios.Remove(funcionario);
                 _dbContext.SaveChanges();
 
-                return StatusCode(201, $"Entity with ID {funcionario.Id} has been deleted.");
+                var resultado = new ApiResponse
+                {
+                    Msg = "Deletado com sucesso!"
+                };
+
+                return Ok(new object[] { resultado, 200 });
             }
             else
             {

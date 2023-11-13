@@ -1,5 +1,6 @@
 ﻿using Aula_API.Authentication;
 using Aula_API.DataAccess;
+using Aula_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,7 +45,7 @@ public class ProdutoController : ControllerBase
 
             if (produto != null)
             {
-                return Ok(produto);
+                return Ok(new object[] { produto, 200 });
             }
             else
             {
@@ -65,7 +66,13 @@ public class ProdutoController : ControllerBase
         {
             var result = _dbContext.Produtos.Add(produto);
             _dbContext.SaveChanges();
-            return Ok("post executado");
+
+            var resultado = new ApiResponse
+            {
+                Msg = "Cadastrado com sucesso!"
+            };
+
+            return Ok(new object[] { resultado, 200 });
         }
         catch (Exception ex)
         {
@@ -81,7 +88,13 @@ public class ProdutoController : ControllerBase
         {
             var result = _dbContext.Produtos.Update(produto);
             _dbContext.SaveChanges();
-            return StatusCode(201, "put executado");
+
+            var resultado = new ApiResponse
+            {
+                Msg = "Atualizado com sucesso!"
+            };
+
+            return Ok(new object[] { resultado, 200 });
         }
         catch (Exception ex)
         {
@@ -102,7 +115,12 @@ public class ProdutoController : ControllerBase
                 var result = _dbContext.Produtos.Remove(produto);
                 _dbContext.SaveChanges();
 
-                return StatusCode(201, $"Entity with ID {produto.Id} has been deleted.");
+                var resultado = new ApiResponse
+                {
+                    Msg = "Deletado com sucesso!"
+                };
+
+                return Ok(new object[] { resultado, 200 });
             }
             else
             {
