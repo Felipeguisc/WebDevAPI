@@ -34,7 +34,7 @@ public class FuncionarioController : ControllerBase
         }
     }
 
-    [HttpGet("{id:int}", Name = "GetFuncionario")]
+    [HttpGet("{id:int}", Name = "GetFuncionarioById")]
     [ApiKey]
     public IActionResult Get(int id)
     {
@@ -49,6 +49,30 @@ public class FuncionarioController : ControllerBase
             else
             {
                 return NotFound("Nenhum Funcionario encontrado");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while Getting the Funcionario. Error: " + ex.Message);
+        }
+    }
+
+    [HttpPost("GetByCpf", Name = "GetFuncionarioByCpf")]
+    [ApiKey]
+    public IActionResult GetByCpf([FromBody] string cpf)
+    {
+        try
+        {
+            var funcionario = _dbContext.Funcionarios.FirstOrDefault(e => e.Cpf == cpf);
+
+
+            if (funcionario != null)
+            {
+                return Ok(new object[] { funcionario, 200 });
+            }
+            else
+            {
+                return NotFound("Não encontrado");
             }
         }
         catch (Exception ex)

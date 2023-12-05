@@ -149,3 +149,4 @@
 /Users/felipegui/development/git_uniplac/Aula_API/Aula_API/Aula_API_Tests/obj/Debug/net7.0/Aula_API_Tests.pdb
 /Users/felipegui/development/git_uniplac/Aula_API/Aula_API/Aula_API_Tests/obj/Debug/net7.0/Aula_API_Tests.genruntimeconfig.cache
 /Users/felipegui/development/git_uniplac/Aula_API/Aula_API/Aula_API_Tests/obj/Debug/net7.0/ref/Aula_API_Tests.dll
+/Users/felipegui/development/git_uniplac/Aula_API/Aula_API/Aula_API_Tests/bin/Debug/net7.0/SHA3.Net.dll

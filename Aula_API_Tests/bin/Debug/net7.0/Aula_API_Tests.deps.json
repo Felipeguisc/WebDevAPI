@@ -1524,6 +1524,14 @@
         "runtime": {
           "Aula_API.dll": {}
         }
+      },
+      "SHA3.Net/2.0.0.0": {
+        "runtime": {
+          "SHA3.Net.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
       }
     }
   },
@@ -2452,6 +2460,11 @@
     },
     "Aula_API/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SHA3.Net/2.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

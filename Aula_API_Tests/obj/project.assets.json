@@ -1056,6 +1056,15 @@
           }
         }
       },
+      "SHA3.Net/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/SHA3.Net.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/SHA3.Net.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.4": {
         "type": "package",
         "dependencies": {
@@ -2545,6 +2554,7 @@
           "Microsoft.EntityFrameworkCore": "7.0.10",
           "Microsoft.EntityFrameworkCore.SQLite": "7.0.10",
           "Microsoft.Extensions.Logging.Abstractions": "7.0.1",
+          "SHA3.Net": "2.0.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "compile": {
@@ -4363,6 +4373,24 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "SHA3.Net/2.0.0": {
+      "sha512": "ryLRgwVNnWLNW8fkl1qfr13eBkNhiRl2dPIksfEgcQghxrOt21PAEBxg/ofwW2l0FKanYpWT9WzD27O3PGHqpw==",
+      "type": "package",
+      "path": "sha3.net/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/icon.png",
+        "lib/net5.0/SHA3.Net.dll",
+        "lib/net6.0/SHA3.Net.dll",
+        "lib/netstandard2.0/SHA3.Net.dll",
+        "lib/netstandard2.1/SHA3.Net.dll",
+        "license/BouncyCastle.LICENSE",
+        "license/license.txt",
+        "sha3.net.2.0.0.nupkg.sha512",
+        "sha3.net.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.4": {
@@ -8100,7 +8128,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.309/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
       }
     }
   }

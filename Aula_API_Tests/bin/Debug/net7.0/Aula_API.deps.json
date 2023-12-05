@@ -14,6 +14,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "7.0.10",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.10",
           "Microsoft.Extensions.Logging.Abstractions": "7.0.1",
+          "SHA3.Net": "2.0.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -201,6 +202,14 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.1.1"
+          }
+        }
+      },
+      "SHA3.Net/2.0.0": {
+        "runtime": {
+          "lib/net6.0/SHA3.Net.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
           }
         }
       },
@@ -585,6 +594,13 @@
       "sha512": "sha512-KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
+    },
+    "SHA3.Net/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ryLRgwVNnWLNW8fkl1qfr13eBkNhiRl2dPIksfEgcQghxrOt21PAEBxg/ofwW2l0FKanYpWT9WzD27O3PGHqpw==",
+      "path": "sha3.net/2.0.0",
+      "hashPath": "sha3.net.2.0.0.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.4": {
       "type": "package",
